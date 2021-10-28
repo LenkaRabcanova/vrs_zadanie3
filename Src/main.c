@@ -51,7 +51,10 @@ int main(void)
   /* Configure external interrupt - EXTI*/
 
   	  //type your code for EXTI configuration (priority, enable EXTI, setup EXTI for input pin, trigger edge) here:
-
+  SYSCFG_EXTICR2 &= ~(7 << 12);
+  EXTI_IMR2 |= (1 << 3);
+  EXTI_RTSR2 &= ~(1 << 3);
+  EXTI_FTSR2 |= (1 << 3);
 
   /* Configure GPIOB-4 pin as an input pin - button */
 
@@ -61,6 +64,30 @@ int main(void)
   /* Configure GPIOA-4 pin as an output pin - LED */
 
 	  //type your code for GPIO configuration here:
+  /* Enable clock for GPIO port A*/
+
+    RCC_AHBENR_REG |= (1 << 17);
+
+    /* Enable clock for GPIO port B*/
+
+    RCC_AHBENR_REG |= (1 << 18);
+
+
+    /* GPIOA pin 3 and 4 setup */
+
+
+
+    GPIOA_MODER_REG &= ~(1 << 9); // 4 is output
+    GPIOA_MODER_REG |= (1 << 8); // 4 is output 01 (98)
+    GPIOA_PUPDR_REG &= ~(3 << 8);
+    GPIOA_OTYPER_REG &= ~(1 << 4); //output is push/pull
+    GPIOA_OSPEEDER_REG &= ~(1 << 8); //output is lowspeed
+
+
+    GPIOB_MODER_REG &= ~(3 << 8); //4 is input
+    GPIOB_PUPDR_REG &= ~(1 << 9); //input is  01 (76) Pull-up
+    GPIOB_PUPDR_REG |= (1 << 8);
+
 
 
   while (1)
@@ -116,10 +143,34 @@ void SystemClock_Config(void)
   LL_SetSystemCoreClock(8000000);
 }
 
-
 uint8_t checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required)
 {
 	  //type your code for "checkButtonState" implementation here:
+	uint8_t button_state = 0, timeout = 0;
+
+		while(button_state < samples_required && timeout < samples_window)
+		{
+			if(!(PORT->IDR & (1 << PIN))/*LL_GPIO_IsInputPinSet(PORT, PIN)*/)
+			{
+				button_state += 1;
+			}
+			else
+			{
+				button_state = 0;
+			}
+
+			timeout += 1;
+			LL_mDelay(1);
+		}
+
+		if((button_state >= samples_required) && (timeout <= samples_window))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 }
 
 
@@ -137,6 +188,7 @@ void EXTI4_IRQHandler(void)
 	/* Clear EXTI4 pending register flag */
 
 		//type your code for pending register flag clear here:
+	EXTI_PR2 |= (1 << 4);
 }
 
 /* USER CODE BEGIN 4 */
