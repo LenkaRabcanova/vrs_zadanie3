@@ -51,6 +51,7 @@ int main(void)
   /* Configure external interrupt - EXTI*/
 
   	  //type your code for EXTI configuration (priority, enable EXTI, setup EXTI for input pin, trigger edge) here:
+
   SYSCFG_EXTICR2 &= ~(7 << 12);
   EXTI_IMR2 |= (1 << 3);
   EXTI_RTSR2 &= ~(1 << 3);
@@ -95,14 +96,11 @@ int main(void)
 	  // Modify the code below so it sets/resets used output pin connected to the LED
 	  if(switch_state)
 	  {
-		  GPIOB->BSRR |= GPIO_BSRR_BS_3;
-		  for(uint16_t i=0; i<0xFF00; i++){}
-		  GPIOB->BRR |= GPIO_BRR_BR_3;
-		  for(uint16_t i=0; i<0xFF00; i++){}
+		  LED_ON;
 	  }
 	  else
 	  {
-		  GPIOB->BRR |= GPIO_BRR_BR_3;
+		  LED_OFF;
 	  }
   }
 
@@ -150,7 +148,7 @@ uint8_t checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t 
 
 		while(button_state < samples_required && timeout < samples_window)
 		{
-			if(!(PORT->IDR & (1 << PIN))/*LL_GPIO_IsInputPinSet(PORT, PIN)*/)
+			if(((PORT->IDR & (1 << PIN)) && (edge==TRIGGER_RISE)) || (!((PORT->IDR & (1 << PIN)) && (edge==TRIGGER_FALL)))/*LL_GPIO_IsInputPinSet(PORT, PIN)*/)
 			{
 				button_state += 1;
 			}

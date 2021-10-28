@@ -63,7 +63,7 @@
 #define BUTTON_GET_STATE		!(GPIOA_IDR_REG & (1 << 4))
 
 
-#define SYSCFG_BASE_ADDR        (uint32_t)(0x4001 0000)
+#define SYSCFG_BASE_ADDR        (uint32_t)(0x40010000U)
 #define SYSCFG_EXTICR2          *((volatile uint32_t *)(SYSCFG_BASE_ADDR + 0x0CU))
 #define EXTI_IMR2               *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x20U))
 #define EXTI_RTSR2              *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x28U))
@@ -76,8 +76,8 @@
 #define		GPIO_PIN_BUTTON					4
 
 // defines for "checkButtonState"
-#define		TRIGGER_RISE					0
-#define		TRIGGER_FALL					1
+#define		TRIGGER_RISE					1
+#define		TRIGGER_FALL					0
 
 #define		BUTTON_EXTI_TRIGGER				TRIGGER_FALL
 #define		BUTTON_EXTI_SAMPLES_WINDOW		30
