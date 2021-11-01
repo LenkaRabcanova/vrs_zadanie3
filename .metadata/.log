@@ -1,0 +1,34 @@
+!SESSION 2021-11-01 15:37:58.515 -----------------------------------------------
+eclipse.buildId=Version 1.7.0
+java.version=11.0.10
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sk_SK
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-11-01 15:38:46.451
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-11-01 15:38:46.702
+!MESSAGE Log4j initialized with config file C:\Users\jacko\Documents\GitHub\vrs_zadanie3\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-11-01 15:39:12.948
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2021-11-01 15:44:02.215 -----------------------------------------------
+eclipse.buildId=Version 1.7.0
+java.version=11.0.10
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sk_SK
+Framework arguments:  C:\Users\jacko\Documents\GitHub\vrs_zadanie3\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\jacko\Documents\GitHub\vrs_zadanie3\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-11-01 15:44:39.516
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-11-01 15:44:39.609
+!MESSAGE Log4j initialized with config file C:\Users\jacko\Documents\GitHub\vrs_zadanie3\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-11-01 15:44:49.236
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.jobs 2 2 2021-11-01 15:45:01.891
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.st.stm32cube.ide.mcu.ide.startup.ProductDbLoad$1

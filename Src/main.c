@@ -51,11 +51,12 @@ int main(void)
   /* Configure external interrupt - EXTI*/
 
   	  //type your code for EXTI configuration (priority, enable EXTI, setup EXTI for input pin, trigger edge) here:
+  NVIC->ISER[0] |= (1 << 10);
 
-  SYSCFG_EXTICR2 &= ~(7 << 12);
-  EXTI_IMR2 |= (1 << 3);
-  EXTI_RTSR2 &= ~(1 << 3);
-  EXTI_FTSR2 |= (1 << 3);
+  SYSCFG->EXTICR[1] |= (1 << 0);
+  EXTI->IMR |= (1 << 4);
+  EXTI->RTSR &= ~(1 << 4);
+  EXTI->FTSR |= (1 << 4);
 
   /* Configure GPIOB-4 pin as an input pin - button */
 
@@ -186,7 +187,7 @@ void EXTI4_IRQHandler(void)
 	/* Clear EXTI4 pending register flag */
 
 		//type your code for pending register flag clear here:
-	EXTI_PR2 |= (1 << 4);
+	EXTI->PR |= (1 << 4);
 }
 
 /* USER CODE BEGIN 4 */

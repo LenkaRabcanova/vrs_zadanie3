@@ -57,19 +57,19 @@
 #define	RCC_AHBENR_REG			*((volatile uint32_t *)(RCC_BASE_ADDR + 0x00000014U))
 
 /* LED and button macros */
-#define LED_ON					GPIOA_BSRR_REG |= (1 << 3)
-#define LED_OFF					GPIOA_BRR_REG |= (1 << 3)
+#define LED_ON					GPIOA_BSRR_REG |= (1 << 4)
+#define LED_OFF					GPIOA_BRR_REG |= (1 << 4)
 
 #define BUTTON_GET_STATE		!(GPIOA_IDR_REG & (1 << 4))
 
-
+/*
 #define SYSCFG_BASE_ADDR        (uint32_t)(0x40010000U)
 #define SYSCFG_EXTICR2          *((volatile uint32_t *)(SYSCFG_BASE_ADDR + 0x0CU))
 #define EXTI_IMR2               *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x20U))
 #define EXTI_RTSR2              *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x28U))
 #define EXTI_FTSR2              *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x2CU))
 #define EXTI_PR2                *((volatile uint32_t *)((SYSCFG_BASE_ADDR + 0x0CU) + 0x34U))
-
+*/
 
 // defines for input port used by button
 #define		GPIO_PORT_BUTTON				GPIOB
